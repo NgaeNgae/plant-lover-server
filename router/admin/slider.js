@@ -1,0 +1,11 @@
+const express = require('express');
+const router = express.Router();
+const sliderController = require('../../controllers/admin/sliderController');
+const { sliderSchema } = require('../../services/schema');
+const { bodyValidator } = require('../../services/validator');
+router.get('/',sliderController.index);
+router.post('/',bodyValidator(sliderSchema), sliderController.post);
+router.get('/:_id',sliderController.show);
+router.delete('/:_id',sliderController.destroy);
+router.patch('/:_id',sliderController.update);
+module.exports = router;

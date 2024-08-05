@@ -1,0 +1,54 @@
+table products {
+  id int [pk]
+  name varchar(255)
+  images text[] 
+  price decimal
+  count int
+  discount decimal
+  description text
+  created_at timestamp
+  updated_at timestamp
+}
+
+table customers {
+  id int [pk]
+  user_id int
+  phone_number varchar(15)
+  address varchar(255)
+}
+
+table carts {
+  id int [pk]
+  customer_id int [ref: > customers.id]
+  product_id int [ref: > products.id]
+  created_at timestamp
+  updated_at timestamp
+}
+
+table orders {
+  id int [pk]
+  customer_id int [ref: > customers.id]
+  phone_number varchar(15)
+  address varchar(255)
+  total_quantity int
+  total_amount decimal
+  created_at timestamp
+}
+
+table order_items {
+  id int [pk]
+  order_id int [ref: > orders.id]
+  product_id int [ref: > products.id]
+  unit_price decimal
+  quantity int
+  price decimal
+  amount decimal
+  created_at timestamp
+  updated_at timestamp
+}
+
+products ||--o{ carts
+customers ||--o{ carts
+customers ||--o{ orders
+orders ||--o{ order_items
+products ||--o{ order_items

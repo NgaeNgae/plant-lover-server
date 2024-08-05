@@ -1,0 +1,12 @@
+const express = require('express');
+const router = express.Router();
+const ClientController = require('../controllers/client/ClientController');
+router.get('/get-sliders',ClientController.getSliders);
+router.get('/latest-products',ClientController.latestProducts);
+router.get('/best-selling-products',ClientController.bestSellingProducts);
+router.get('/latest-products-for-homepage',ClientController.latestProductsForHomePage);
+router.get('/best-selling-products-for-homepage',ClientController.bestSellingProductsForHomePage);
+router.get('/products',ClientController.getProducts);
+router.get('/get-product/:_id',ClientController.productDetail);
+router.get('/products/search',ClientController.searchProducts);
+module.exports = router;

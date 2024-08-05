@@ -1,0 +1,10 @@
+const express = require('express');
+const router = express.Router();
+const { userSchema } = require('../../services/schema');
+const { bodyValidator, validateToken } = require('../../services/validator');
+const AuthController = require('../../controllers/auth/authController');
+router.post('/register', [bodyValidator(userSchema.register),AuthController.register]);
+router.post('/login', [bodyValidator(userSchema.login), AuthController.login]);
+router.get('/user', [ validateToken() ,AuthController.getUser]);
+router.get('/confirmation/:token', AuthController.confirmaiton);
+module.exports = router;
